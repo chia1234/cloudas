@@ -10,12 +10,15 @@ mongoose.connect(mongodbURL);
 var port = process.env.PORT || 1337;
 http.createServer(function(req, res) {
 	res.writeHead(200, { 'Content-Type': 'text/plain' });
-	res.write('Hello World\n');
+	console.log("Hello World");
+	//res.write('Hello World\n');
 	if(req.method == "GET"){
+		console.log("get");
 		res.write('Get method\n');
 	}
 	if(req.method == "POST"){
+		console.log("post");
 		res.write("POST method\n");
 	}
-	res.write("End\n");
+	res.end("End\n");
 }).listen(port);
