@@ -41,6 +41,7 @@ app.get('/restaurant_id/:x', function(req,res){
 			}
 		});
 	});
+	db.close();
 	res.end('Connection closed ededed\n',200);
 });
 
@@ -51,7 +52,7 @@ app.post('/', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	res.write(".:"+mongoose.connection.readyState);
-	
+
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function (callback) {
 		var rest = mongoose.model('restaurant', RestSchema);
@@ -66,6 +67,7 @@ app.post('/', function(req,res){
 			}
 		});
 	});
+	db.close();
 });
 
 app.listen(process.env.PORT || 8099);
