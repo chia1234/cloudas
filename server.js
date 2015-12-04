@@ -6,6 +6,7 @@ var url  = require('url');
 //mongoose.connect('mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk');
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 var mongoose = require('mongoose');
+console.log('test');
 //var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
 //mongoose.connect(connectionString);
 var port = process.env.PORT || 1337;
