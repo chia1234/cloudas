@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var RestSchema = require('./models/restaurant');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,12 +14,29 @@ app.use(bodyParser.json());
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 var mongoose = require('mongoose');
 
-mongoose.connect(mongodbURL);
-app.get('/', function(req,res) {
-	console.log('Incoming request: GET');
-	console.log('Request body: ', req.body);
-	console.log('name: ', req.params.name);
+app.get('/restaurant_id/:x', function(req,res){
+	// console.log('Incoming request: GET');
+	// console.log('Request body: ', req.body);
+	// console.log('name: ', req.params.name);
+	mongoose.connect(mongodbURL);
+	var db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
 
+	db.once('open', function (callback) {
+		var rest = mongoose.model('restaurant', RestSchema);
+		//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
+		rest.find({restaurant_id: req.params.x},function(err,results){
+			if (err) {
+				console.log("Error: " + err.message);
+				res.write(err.message);
+			}
+			else {
+				db.close();
+				console.log('Found: ',results.length);
+				res.json(results);
+			}
+		});
+	});
 	res.end('Connection closed ededed',200);
 });
 
