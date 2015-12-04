@@ -1,0 +1,13 @@
+{
+    "name": "server",
+    "description": "COMPS381F Project Assignment",
+    "author": "Chia Wing Fung <see.you.soon.cwfa@gmail.com>",
+    "version": "0.0.1",
+    "dependencies": {
+		"body-parser": "*",
+        "mongoose": "*",
+		"express" : "*"
+    },
+    "engine": "node >= 0.10.0",
+    "scripts": {"start": "node server"}
+}
