@@ -18,10 +18,10 @@ app.get('/restaurant_id/:x', function(req,res){
 	var mongoose = require('mongoose');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
-	res.write("......"+mongoose.connection.readyState);
+	res.writemongoose.connection.readyState);
 	//res.write('Incoming request: GET\n');
 
-	//console.log('Incoming request: GET');
+	console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
 
