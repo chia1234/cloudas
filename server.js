@@ -22,7 +22,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var db = mongoose.connection;
 	res.write(".:"+mongoose.connection.readyState);
 	console.log('Incoming request: GET');
-	//res.write('Request body: ', req.body+'\n');
+	res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
 
 	db.on('error', console.error.bind(console, 'connection error:'));
