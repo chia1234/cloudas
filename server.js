@@ -42,7 +42,7 @@ app.get('/restaurant_id/:x', function(req,res){
 });
 
 app.post('/', function(req,res) {
-	mongoose.connect(MONGODBURL);
+	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function (callback) {
@@ -50,7 +50,7 @@ app.post('/', function(req,res) {
 		var r = new rest(req.body);
 		r.save(function(err,results){
 			if (err) {
-				res.end(err.message,500);
+				res.end("error"+err.message,500);
 			}
 			else {
 				db.close();
