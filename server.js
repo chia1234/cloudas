@@ -17,8 +17,8 @@ app.get('/restaurant_id/:x', function(req,res){
 	res.write('Incoming request: GET\n');
 
 	console.log('Incoming request: GET');
-	res.write('Request body: ', req.body+'\n');
-	res.write('name: ', req.params.name+'\n');
+	//res.write('Request body: ', req.body+'\n');
+	//res.write('name: ', req.params.name+'\n');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
