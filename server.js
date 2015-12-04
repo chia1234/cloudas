@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 var mongoose = require('mongoose');
 app.get('/restaurant_id/:x', function(req,res){
-	log('Incoming request: GET');
+	console.log('Incoming request: GET');
 
 	// console.log('Incoming request: GET');
 	// console.log('Request body: ', req.body);
