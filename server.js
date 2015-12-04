@@ -7,6 +7,13 @@ var RestSchema = require('./models/restaurant');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+http.createServer(function(req, res) {
+ //res.writeHead(200, { 'Content-Type': 'text/plain' });
+ console.log("Hello World");
+ //res.end("End\n");
+}).listen(port);
+
 // var MongoClient = require('mongodb').MongoClient;
 // var assert = require('assert');
 // var ObjectId = require('mongodb').ObjectID;
@@ -29,7 +36,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	db.once('open', function (callback) {
 		var rest = mongoose.model('restaurant', RestSchema);
 		//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
-		rest.find({street: req.params.x},function(err,results){
+		rest.find({restaurant_id: req.params.x},function(err,results){
 			if (err) {
 				res.write("Error: " + err.message);
 				//res.write(err.message);
