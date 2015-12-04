@@ -1,5 +1,5 @@
-var http = require('http');
-var url  = require('url');
+//var http = require('http');
+//var url  = require('url');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
