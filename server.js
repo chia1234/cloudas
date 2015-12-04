@@ -17,4 +17,5 @@ http.createServer(function(req, res) {
 	if(req.method == "POST"){
 		res.write("POST method\n");
 	}
+	res.write("End\n");
 }).listen(port);
