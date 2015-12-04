@@ -19,3 +19,5 @@ app.get('/', function(req,res) {
 	console.log('name: ', req.params.name);
 	res.end('Connection closed',200);
 });
+
+app.listen(process.env.PORT || 1337);
