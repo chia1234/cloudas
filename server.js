@@ -12,37 +12,14 @@ app.use(bodyParser.json());
 //mongoose.connect('mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk');
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 var mongoose = require('mongoose');
+
 mongoose.connect(mongodbURL);
 app.get('/', function(req,res) {
 	console.log('Incoming request: GET');
 	console.log('Request body: ', req.body);
 	console.log('name: ', req.params.name);
-	res.end('Connection closed',200);
-});
 
-// Path 1
-app.get('/name/:name', function(req,res) {
-	console.log('Incoming request: GET');
-	console.log('Request body: ', req.body);
-	console.log('name: ', req.params.name);
-	res.end('Connection closed',200);
-});
-
-// Path 2
-app.get('/age/:age', function(req,res) {
-	console.log('Incoming request: GET');
-	console.log('Request body: ', req.body);
-	console.log('age: ', req.params.age);
-	res.end('Connection closed',200);
-});
-
-// Path 3
-app.get('/name/:name/age/:age', function(req,res) {
-	console.log('Incoming request: GET');
-	console.log('Request body: ', req.body);
-	console.log('name: ', req.params.name);
-	console.log('age: ', req.params.age);
-	res.end('Connection closed',200);
+	res.end('Connection closed ededed',200);
 });
 
 // Path 4
