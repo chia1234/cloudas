@@ -5,6 +5,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var RestSchema = require('./models/restaurant');
+console.log('Incoming request: GET');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
