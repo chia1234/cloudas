@@ -3,7 +3,7 @@ var url  = require('url');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var RestSchema = require('/models/restaurant');
+var RestSchema = require('models/restaurant');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
