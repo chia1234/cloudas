@@ -1,3 +1,4 @@
+console.log('Incoming request: GET');
 var http = require('http');
 var url  = require('url');
 var express = require('express');
@@ -13,8 +14,9 @@ app.use(bodyParser.json());
 //mongoose.connect('mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk');
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 var mongoose = require('mongoose');
-console.log('Incoming request: GET');
 app.get('/restaurant_id/:x', function(req,res){
+	console.log('Incoming request: GET');
+
 	// console.log('Incoming request: GET');
 	// console.log('Request body: ', req.body);
 	// console.log('name: ', req.params.name);
