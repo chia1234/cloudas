@@ -1,4 +1,3 @@
-console.log("Hello World");
 var http = require('http');
 var url  = require('url');
 var express = require('express');
@@ -8,15 +7,9 @@ var RestSchema = require('./models/restaurant');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-var port = process.env.PORT || 1337;
-http.createServer(function(req, res) {
- res.writeHead(200, { 'Content-Type': 'text/plain' });
- console.log("Hello World");
- res.end("End\n");
-}).listen(port);
 
 // var MongoClient = require('mongodb').MongoClient;
-// var assert = require('assert');
+var assert = require('assert');
 // var ObjectId = require('mongodb').ObjectID;
 //mongoose.connect('mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk');
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
@@ -27,8 +20,8 @@ app.get('/restaurant_id/:x', function(req,res){
 	var mongoose = require('mongoose');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
-	//res.write(".:"+mongoose.connection.readyState);
-	//console.log('Incoming request: GET');
+	res.write(".:"+mongoose.connection.readyState);
+	console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
 
