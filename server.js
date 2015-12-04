@@ -29,7 +29,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	db.once('open', function (callback) {
 		var rest = mongoose.model('restaurant', RestSchema);
 		//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
-		rest.find({restaurant_id: req.params.x},function(err,results){
+		rest.find({street: req.params.x},function(err,results){
 			if (err) {
 				res.write("Error: " + err.message);
 				//res.write(err.message);
