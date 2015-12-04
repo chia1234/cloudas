@@ -7,11 +7,11 @@ var RestSchema = require('./models/restaurant');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+var port = process.env.PORT || 1337;
 http.createServer(function(req, res) {
- //res.writeHead(200, { 'Content-Type': 'text/plain' });
+ res.writeHead(200, { 'Content-Type': 'text/plain' });
  console.log("Hello World");
- //res.end("End\n");
+ res.end("End\n");
 }).listen(port);
 
 // var MongoClient = require('mongodb').MongoClient;
