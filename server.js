@@ -16,14 +16,15 @@ var mongoose = require('mongoose');
 app.get('/restaurant_id/:x', function(req,res){
 	var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 	var mongoose = require('mongoose');
+	mongoose.connect(mongodbURL);
+	var db = mongoose.connection;
 	res.write("......"+mongoose.connection.readyState);
 	//res.write('Incoming request: GET\n');
 
 	//console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
-	mongoose.connect(mongodbURL);
-	var db = mongoose.connection;
+
 	db.on('error', console.error.bind(console, 'connection error:'));
 
 	db.once('open', function (callback) {
