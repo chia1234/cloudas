@@ -16,9 +16,9 @@ var mongoose = require('mongoose');
 app.get('/restaurant_id/:x', function(req,res){
 	res.write('Incoming request: GET\n');
 
-	// console.log('Incoming request: GET');
-	// console.log('Request body: ', req.body);
-	// console.log('name: ', req.params.name);
+	//console.log('Incoming request: GET');
+	res.write('Request body: ', req.body+'\n');
+	res.write('name: ', req.params.name+'\n');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
@@ -33,7 +33,7 @@ app.get('/restaurant_id/:x', function(req,res){
 			}
 			else {
 				db.close();
-				console.log('Found: ',results.length);
+				res.write('Found: ',results.length);
 				res.json(results);
 			}
 		});
