@@ -1,4 +1,3 @@
-console.log('Incoming request: GET');
 var http = require('http');
 var url  = require('url');
 var express = require('express');
