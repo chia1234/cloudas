@@ -28,8 +28,8 @@ app.get('/restaurant_id/:x', function(req,res){
 		//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
 		rest.find({restaurant_id: req.params.x},function(err,results){
 			if (err) {
-				console.log("Error: " + err.message);
-				res.write(err.message);
+				res.write("Error: " + err.message);
+				//res.write(err.message);
 			}
 			else {
 				db.close();
