@@ -3,7 +3,7 @@ var url  = require('url');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var RestSchema = require('models/restaurant');
+var RestSchema = require('/models/restaurant');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -41,7 +41,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	res.end('Connection closed ededed\n',200);
 });
 
-app.post('/', function(req,res) {
+app.post('/', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
