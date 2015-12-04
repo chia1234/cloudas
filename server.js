@@ -4,7 +4,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var RestSchema = require('./models/restaurant');
-	console.log('Incoming request: GET');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -15,7 +14,7 @@ app.use(bodyParser.json());
 var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
 var mongoose = require('mongoose');
 app.get('/restaurant_id/:x', function(req,res){
-	console.log('Incoming request: GET');
+	res.write('Incoming request: GET\n');
 
 	// console.log('Incoming request: GET');
 	// console.log('Request body: ', req.body);
@@ -39,12 +38,8 @@ app.get('/restaurant_id/:x', function(req,res){
 			}
 		});
 	});
-	console.log('Incoming request: GET');
 	res.end('Connection closed ededed',200);
-	console.log('Incoming request: GET');
-
 });
-	console.log('Incoming request: GET');
 
 // // Path 4
 // app.delete('/name/:name', function(req,res) {
