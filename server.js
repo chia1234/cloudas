@@ -24,6 +24,10 @@ conn.on('error', console.error.bind(console, 'connection error:'));
 
 conn.once('open', function() {
 	console.log('connected');
+	res.writeHead(200, {'Content-Type': 'text/plain'});
+	res.write('xx');
+	res.json({ message: 'lll'});
+	res.end();
   // Wait for the database connection to establish, then start the app.                         
 });
 
