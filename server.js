@@ -29,19 +29,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var User = mongoose.model('users', UserSchema);
 	User.find({}, function(err, res){
 		res.json({ message: 'lll'});
-	}
-	// rest.find({},function(err,results){
-	// 	res.json({ message: 'lll'});
-	// });
-	//db.on('error', console.error.bind(console, 'connection error:'));
-	// db.once('open', function (callback) {
-	// 		res.write('Found: ');
-	// 		res.end("Find Json::",200);
-	// });
-	//res.write('Found:');
-	//res.end('Find Json::',200);
-	
-	
+	});
 });
 
 app.post('/', function(req,res){
