@@ -19,6 +19,14 @@ app.get('/restaurant_id/:x', function(req,res){
 	var mongoose = require('mongoose');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
+	var json = "{_id: {$oid: "5661fb76e4b0c9b5290f827c"},building: "xxx",
+    street: "xxx",
+    zipcode: "xxx",
+    coord: [
+        100,
+        100
+    ]
+	}";
 	//res.write(".:"+mongoose.connection.readyState);
 	//console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
@@ -26,24 +34,24 @@ app.get('/restaurant_id/:x', function(req,res){
 
 	//db.on('error', console.error.bind(console, 'connection error:'));
 
-	db.once('open', function (callback) {
-		var rest = mongoose.model('restaurant', RestSchema);
-		//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
-		rest.find({restaurant_id: req.params.x},function(err,results){
-			if (err) {
-				res.write("Error: " + err.message);
-				res.json("Error: " + err.message);
+	//db.once('open', function (callback) {
+	//var rest = mongoose.model('restaurant', RestSchema);
+	//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
+	//rest.find({restaurant_id: req.params.x},function(err,results){
+			//if (err) {
+				//res.write("Error: " + err.message);
+				//res.json("Error: " + err.message);
 				//res.write(err.message);
-			}
-			else {
-				db.close();
-				res.write('Found: ',results.length);
-				res.json(results);
-			}
+			// }
+			// else {
+			// 	db.close();
+			// 	res.write('Found: ',results.length);
+			// 	res.json(results);
+			// }
 		});
 	});
 	db.close();
-	res.end('Connection closed ededed\n',200);
+	res.end(json,200);
 });
 
 app.post('/', function(req,res){
