@@ -26,7 +26,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	//res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
 
-	db.on('error', console.error.bind(console, 'connection error:'));
+	//db.on('error', console.error.bind(console, 'connection error:'));
 
 	db.once('open', function (callback) {
 	var rest = mongoose.model('restaurant', RestSchema);
@@ -44,7 +44,7 @@ app.get('/restaurant_id/:x', function(req,res){
 				db.close();
 				//res.write('Found: ',results.length);
 				
-				res.json(results);
+				//res.json(results);
 				res.end("Find Json::"+json+"\n",200);
 
 			}
