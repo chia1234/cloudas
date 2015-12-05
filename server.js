@@ -19,7 +19,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var mongoose = require('mongoose');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
-	var json = '{"_id": {"$oid": "5661fb76e4b0c9b5290f827c"},"building": "xxx","street": "xxx","zipcode": "xxx"}';
+	var json = '{}';
 	db.close();
 	res.write("write");
 	res.end("json:"+json,200);
@@ -40,12 +40,12 @@ app.get('/restaurant_id/:x', function(req,res){
 				//res.write(err.message);
 			// }
 			// else {
-			// 	db.close();
-			// 	res.write('Found: ',results.length);
-			// 	res.json(results);
-			// }
-		});
-	});
+			//db.close();
+			//res.write('Found: ',results.length);
+			//res.json(results);
+			//}
+		//});
+	//});
 	
 });
 
