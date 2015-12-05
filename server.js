@@ -30,6 +30,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	//User.find({}, function(err, res){
 		//if (err) res.json({ message: 'lll'});
 	//});
+	res.write("x");
 	res.json({ message: 'lll'});
 });
 
