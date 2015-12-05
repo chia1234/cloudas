@@ -20,10 +20,21 @@ app.get('/restaurant_id/:x', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	//var json = '{}';
-	var rest = mongoose.model('restaurant', RestSchema);
-	rest.find({},function(err,results){
-		res.json({ message: 'lll'});
+	var UserSchema = new Schema({
+    first_name: String,
+    last_name: String,
+    email: String
 	});
+	var rest = mongoose.model('restaurant', RestSchema);
+	var User = mongoose.model('users', UserSchema);
+	//app.get('/users', function (req, res) {
+	    User.find({}, function (err, docs) {
+	        res.json(docs);
+	    });
+	//});
+	// rest.find({},function(err,results){
+	// 	res.json({ message: 'lll'});
+	// });
 	//db.on('error', console.error.bind(console, 'connection error:'));
 	// db.once('open', function (callback) {
 	// 		res.write('Found: ');
