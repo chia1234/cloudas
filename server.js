@@ -27,8 +27,8 @@ app.get('/restaurant_id/:x', function(req,res){
 	//res.write('name: ', req.params.name+'\n');
 
 	//db.on('error', console.error.bind(console, 'connection error:'));
-	res.write('Found: ');
-	res.end("Find Json::"+results+"\n",200);
+	res.write('Found:');
+	res.end('Find Json::'+results,200);
 	
 	
 });
