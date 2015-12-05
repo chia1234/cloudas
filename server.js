@@ -18,7 +18,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	res.writeHead(200, {'Content-Type': 'text/plain'});
 	res.write('xx');
 	res.json({ message: 'lll'});
-	res.end("end",200);
+	res.end();
 });
 
 
