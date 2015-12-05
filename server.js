@@ -20,13 +20,6 @@ app.get('/restaurant_id/:x', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	var json = '{}';
-	
-	//res.write(".:"+mongoose.connection.readyState);
-	//console.log('Incoming request: GET');
-	//res.write('Request body: ', req.body+'\n');
-	//res.write('name: ', req.params.name+'\n');
-
-	//db.on('error', console.error.bind(console, 'connection error:'));
 	res.write('Found:');
 	res.end('Find Json::'+results,200);
 	
