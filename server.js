@@ -16,7 +16,7 @@ var mongoose = require('mongoose');
 
 app.get('/restaurant_id/:x', function(req,res){
 	
-	res.write("x");
+	res.write('xx');
 	res.json({ message: 'lll'});
 	res.end("end",200);
 });
