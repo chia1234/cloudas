@@ -20,32 +20,36 @@ app.get('/restaurant_id/:x', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	var json = '{}';
-	db.close();
-	res.write("write");
-	res.end("json:"+json,200);
+	
 	//res.write(".:"+mongoose.connection.readyState);
 	//console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
 
-	//db.on('error', console.error.bind(console, 'connection error:'));
+	db.on('error', console.error.bind(console, 'connection error:'));
 
-	//db.once('open', function (callback) {
-	//var rest = mongoose.model('restaurant', RestSchema);
+	db.once('open', function (callback) {
+	var rest = mongoose.model('restaurant', RestSchema);
 	//Kitten.find({name: new RegExp(req.params.x)},function(err,results){
-	//rest.find({restaurant_id: req.params.x},function(err,results){
-			//if (err) {
+	rest.find({street: req.params.x},function(err,results){
+			if (err) {
 				//res.write("Error: " + err.message);
 				//res.json("Error: " + err.message);
-				//res.write(err.message);
-			// }
-			// else {
-			//db.close();
-			//res.write('Found: ',results.length);
-			//res.json(results);
-			//}
-		//});
-	//});
+				db.close();
+				res.write("Error Message:"+err.message);
+				//res.write("write");
+				res.end("Not Found json:"+json+"\n",200);
+			}
+			else {
+				db.close();
+				//res.write('Found: ',results.length);
+				
+				res.json(results);
+				res.end("Find Json::"+json+"\n",200);
+
+			}
+		});
+	});
 	
 });
 
