@@ -19,14 +19,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var mongoose = require('mongoose');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
-	var json = "{_id: {$oid: "5661fb76e4b0c9b5290f827c"},building: "xxx",
-    street: "xxx",
-    zipcode: "xxx",
-    coord: [
-        100,
-        100
-    ]
-	}";
+	var json = '{"_id": {"$oid": "5661fb76e4b0c9b5290f827c"},"building": "xxx","street": "xxx","zipcode": "xxx"}';
 	//res.write(".:"+mongoose.connection.readyState);
 	//console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
