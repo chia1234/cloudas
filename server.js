@@ -18,7 +18,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	
 	res.write("x");
 	res.json({ message: 'lll'});
-
+	res.end("end",200);
 });
 
 
