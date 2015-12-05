@@ -20,6 +20,8 @@ app.get('/restaurant_id/:x', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	var json = '{"_id": {"$oid": "5661fb76e4b0c9b5290f827c"},"building": "xxx","street": "xxx","zipcode": "xxx"}';
+	db.close();
+	res.end(json,200);
 	//res.write(".:"+mongoose.connection.readyState);
 	//console.log('Incoming request: GET');
 	//res.write('Request body: ', req.body+'\n');
@@ -43,8 +45,7 @@ app.get('/restaurant_id/:x', function(req,res){
 			// }
 		});
 	});
-	db.close();
-	res.end(json,200);
+	
 });
 
 app.post('/', function(req,res){
