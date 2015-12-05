@@ -24,19 +24,34 @@ conn.on('error', console.error.bind(console, 'connection error:'));
 
 conn.once('open', function() {
 	console.log('connected');
-	res.writeHead(200, {'Content-Type': 'text/plain'});
-	res.write('xx');
-	res.json({ message: 'lll'});
-	res.end();
+		var rest = mongoose.model('restaurant', RestSchema);
+		rest.find({},function(err,results){
+		if (err) {
+			console.log("Error");
+			//res.write("Error: " + err.message);
+			//res.json("Error: " + err.message);
+			//db.close();
+			//res.write("Error Message:"+err.message);
+			//res.write("write");
+			//res.end("Not Found json:"+results+"\n",200);
+		}
+		else {
+			console.log("FOund"+results);
+				app.get('/res/:x', function(req,res){
+				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.write('xx');
+				res.json({ message: 'lll'});
+				res.end();
+				console.log(res);
+			});
+			//db.close();
+			//res.write('Found: ');
+			
+			//res.json(results);
+			//res.end("Find Json::"+results+"\n",200);
+
+		}
+	});
   // Wait for the database connection to establish, then start the app.                         
 });
-
-// app.get('/res/:x', function(req,res){
-// 	res.writeHead(200, {'Content-Type': 'text/plain'});
-// 	res.write('xx');
-// 	res.json({ message: 'lll'});
-// 	res.end();
-// });
-
-
 // app.listen(process.env.PORT || 8099);
