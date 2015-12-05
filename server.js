@@ -15,18 +15,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var db = mongoose.connection;
 	res.write("x");
 	res.json({ message: 'lll'});
-	//var json = '{}';
-	// var UserSchema = new Schema({
- //    first_name: String,
- //    last_name: String,
- //    email: String
-	// });
-	//var rest = mongoose.model('restaurant', RestSchema);
-	//var User = mongoose.model('users', UserSchema);
-	//User.find({}, function(err, res){
-		//if (err) res.json({ message: 'lll'});
-	//});
-	
+
 });
 
 
