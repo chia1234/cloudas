@@ -26,13 +26,10 @@ app.get('/restaurant_id/:x', function(req,res){
 	//res.write('Request body: ', req.body+'\n');
 	//res.write('name: ', req.params.name+'\n');
 
-	//db.on('error', console.error.bind(console, 'connection error:'));
-
-	db.once('open', function (callback) {
-			res.write('Found: ');
-			res.end("Find Json::"+results+"\n",200);
-		});
-
+	db.on('error', console.error.bind(console, 'connection error:'));
+	res.write('Found: ');
+	res.end("Find Json::"+results+"\n",200);
+	
 	
 });
 
