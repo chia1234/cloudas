@@ -21,9 +21,11 @@ app.get('/restaurant_id/:x', function(req,res){
 	var db = mongoose.connection;
 	//var json = '{}';
 	var rest = mongoose.model('restaurant', RestSchema);
-	rest.find({},function(err,results){
-		res.json({ message: results});
-	});
+	res.json({ message: 'results'});
+
+	// rest.find({},function(err,results){
+	// 	res.json({ message: 'results'});
+	// });
 	//db.on('error', console.error.bind(console, 'connection error:'));
 	// db.once('open', function (callback) {
 	// 		res.write('Found: ');
