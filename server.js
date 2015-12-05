@@ -21,7 +21,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var db = mongoose.connection;
 	var json = '{}';
 	res.write('Found:');
-	res.end('Find Json::'+results,200);
+	res.end('Find Json::',200);
 	
 	
 });
