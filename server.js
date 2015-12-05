@@ -27,35 +27,35 @@ app.get('/restaurant_id/:x', function(req,res){
 	});
 	var rest = mongoose.model('restaurant', RestSchema);
 	var User = mongoose.model('users', UserSchema);
-	User.find({}, function(err, res){
+	//User.find({}, function(err, res){
 		//if (err) res.json({ message: 'lll'});
-	});
+	//});
 	res.json({ message: 'lll\n'});
 });
 
-app.post('/', function(req,res){
-	var RestSchema = require('./models/restaurant');
-	var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
-	var mongoose = require('mongoose');
-	mongoose.connect(mongodbURL);
-	var db = mongoose.connection;
-	res.write(".:"+mongoose.connection.readyState);
+// app.post('/', function(req,res){
+// 	var RestSchema = require('./models/restaurant');
+// 	var mongodbURL = 'mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk';
+// 	var mongoose = require('mongoose');
+// 	mongoose.connect(mongodbURL);
+// 	var db = mongoose.connection;
+// 	res.write(".:"+mongoose.connection.readyState);
 
-	db.on('error', console.error.bind(console, 'connection error:'));
-	db.once('open', function (callback) {
-		var rest = mongoose.model('restaurant', RestSchema);
-		var r = new rest(req.body);
-		r.save(function(err,results){
-			if (err) {
-				res.end("error"+err.message,500);
-			}
-			else {
-				db.close();
-				res.end('Done',200);
-			}
-		});
-	});
-	db.close();
-});
+// 	db.on('error', console.error.bind(console, 'connection error:'));
+// 	db.once('open', function (callback) {
+// 		var rest = mongoose.model('restaurant', RestSchema);
+// 		var r = new rest(req.body);
+// 		r.save(function(err,results){
+// 			if (err) {
+// 				res.end("error"+err.message,500);
+// 			}
+// 			else {
+// 				db.close();
+// 				res.end('Done',200);
+// 			}
+// 		});
+// 	});
+// 	db.close();
+// });
 
 app.listen(process.env.PORT || 8099);
