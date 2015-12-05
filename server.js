@@ -19,13 +19,16 @@ app.get('/restaurant_id/:x', function(req,res){
 	var mongoose = require('mongoose');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
-	var json = '{}';
-	db.on('error', console.error.bind(console, 'connection error:'));
+	//var json = '{}';
+	var rest = mongoose.model('restaurant', RestSchema);
+	rest.find({},function(err,results){
+		res.json({ message: results});
+	});
+	//db.on('error', console.error.bind(console, 'connection error:'));
 	// db.once('open', function (callback) {
 	// 		res.write('Found: ');
 	// 		res.end("Find Json::",200);
 	// });
-	res.json({ message: "第一個API!" });
 	//res.write('Found:');
 	//res.end('Find Json::',200);
 	
