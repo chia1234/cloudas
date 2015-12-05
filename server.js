@@ -20,13 +20,13 @@ app.get('/restaurant_id/:x', function(req,res){
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
 	//var json = '{}';
-	var UserSchema = new Schema({
-    first_name: String,
-    last_name: String,
-    email: String
-	});
-	var rest = mongoose.model('restaurant', RestSchema);
-	var User = mongoose.model('users', UserSchema);
+	// var UserSchema = new Schema({
+ //    first_name: String,
+ //    last_name: String,
+ //    email: String
+	// });
+	//var rest = mongoose.model('restaurant', RestSchema);
+	//var User = mongoose.model('users', UserSchema);
 	//User.find({}, function(err, res){
 		//if (err) res.json({ message: 'lll'});
 	//});
