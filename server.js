@@ -28,7 +28,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	var rest = mongoose.model('restaurant', RestSchema);
 	var User = mongoose.model('users', UserSchema);
 	User.find({}, function(err, res){
-		res.json({ message: 'lll'});
+		if (err) res.json({ message: 'lll'});
 	});
 });
 
