@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
-
-var restaurantSchema = mongoose.Schema({
+//var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var restaurantSchema = new Schema({
     address : {
         street: String,
         zipcode: String,
@@ -14,4 +14,4 @@ var restaurantSchema = mongoose.Schema({
     restaurant_id: String
 });
 
-module.exports = restaurantSchema;
+//module.exports = restaurantSchema;
