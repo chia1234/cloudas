@@ -36,16 +36,16 @@ app.get('/restaurant_id/:x', function(req,res){
 				//res.write("Error: " + err.message);
 				//res.json("Error: " + err.message);
 				db.close();
-				res.write("Error Message:"+err.message);
-				//res.write("write");
-				res.end("Not Found json:"+json+"\n",200);
+				//res.write("Error Message:"+err.message);
+				res.write("write");
+				res.end("Not Found json:"+results+"\n",200);
 			}
 			else {
 				db.close();
-				//res.write('Found: ',results.length);
+				res.write('Found: ');
 				
 				//res.json(results);
-				res.end("Find Json::"+json+"\n",200);
+				res.end("Find Json::"+results+"\n",200);
 
 			}
 		});
