@@ -21,10 +21,11 @@ app.get('/restaurant_id/:x', function(req,res){
 	var db = mongoose.connection;
 	var json = '{}';
 	db.on('error', console.error.bind(console, 'connection error:'));
-	db.once('open', function (callback) {
-			res.write('Found: ');
-			res.end("Find Json::",200);
-	});
+	// db.once('open', function (callback) {
+	// 		res.write('Found: ');
+	// 		res.end("Find Json::",200);
+	// });
+	res.json({ message: "第一個API!" });
 	//res.write('Found:');
 	//res.end('Find Json::',200);
 	
