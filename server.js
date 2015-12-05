@@ -1,10 +1,11 @@
+var http = require('http');
 var express = require('express');
-var app = express.createServer();
-app.use(express.bodyParser());
-app.all('/', function(req, res) {res.write('xx');res.json({ message: 'lll'});
-    //res.send(req.body.title + req.body.text);
+var app = express();
+var server = http.createServer(app);
+app.get('/',function(request, response){ //我們要處理URL為 "/" 的HTTP GET請求
+    response.end('你好！'); //作出回應
 });
-app.listen(3000);
+
 
 // //var http = require('http');
 // //var url  = require('url');
