@@ -5,7 +5,6 @@ var app = express();
 var mongoose = require('mongoose');
 
 var bodyParser = require('body-parser');
-var RestSchema = require('./models/restaurant');
 console.log("hello");
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,19 +14,22 @@ app.use(bodyParser.json());
                  //};
 
 var options = { server: { socketOptions: { keepAlive: 1} }};
-
 var mongodbUri = 'mongodb://chia1234:ouhk@ds061984.mongolab.com:61984/ouhk';
+
 //var mongodbUri = 'mongodb://localhost/restaurant';
 
 // mongoose.connect(mongodbUri);
 // //mongoose.createConnection(mongodbUri);
 // console.log("connected");
-var db = mongoose.connection;
+
 //var conn = mongoose.connection;
 console.log("set all var clear");
 console.log(mongoose.connection.readyState);
 
 app.get('/restaurant_id/:x', function(req,res){
+	var RestSchema = require('./models/restaurant');
+	var mongodbUri = 'mongodb://chia1234:ouhk@ds061984.mongolab.com:61984/ouhk';
+	var db = mongoose.connection;
 	//console.log("start handle app.get");
 	db.on('error', console.error);
 	//console.log("no error conn");
@@ -57,13 +59,17 @@ app.get('/restaurant_id/:x', function(req,res){
 });
 
 app.post('/', function(req,res) {
+	var RestSchema = require('./models/restaurant');
+	var mongodbUri = 'mongodb://chia1234:ouhk@ds061984.mongolab.com:61984/ouhk';
+	var db = mongoose.connection;
+	mongoose.connect(mongodbUri);
 	console.log('post handle');
 	db.on('error', console.error);
 	db.once('open', function() {
 		console.log('post handle connected ');
 		var rObj = {};
 		rObj.address = {};
-		rObj.address.building = req.body.building;
+		rObj.address.building = JSON.stringify(req.body.building);
 		rObj.address.street = req.body.street;
 		rObj.address.zipcode = req.body.zipcode;
 		rObj.address.coord = [];
@@ -75,7 +81,7 @@ app.post('/', function(req,res) {
 		rObj.restaurant_id = req.body.restaurant_id;
 
 		var rest = mongoose.model('restaurant', RestSchema);
-		var k = new rest(rObj);
+		var k = new rest(req.body);
 		console.log('seted all var');
 		k.save(function(err,results){
 			console.log('start save k');
@@ -93,10 +99,12 @@ app.post('/', function(req,res) {
 		});
 		//db.close();
 	});
-	mongoose.connect(mongodbUri);
 });
 
 app.delete('/restaurant_id/:id',function(req,res) {
+	var RestSchema = require('./models/restaurant');
+	var mongodbUri = 'mongodb://chia1234:ouhk@ds061984.mongolab.com:61984/ouhk';
+	var db = mongoose.connection;
 	//var restaurantSchema = require('./models/restaurant');
 	//mongoose.connect('mongodb://localhost/test');
 	//var db = mongoose.connection;
@@ -118,6 +126,34 @@ app.delete('/restaurant_id/:id',function(req,res) {
 		});
 	});
 	mongoose.connect(mongodbUri);
+});
+
+app.put('/restaurant_id/:name/:attrib/:attrib_value', function(req,res) {
+	var criteria = {};
+	criteria[req.params.attrib] = req.params.attrib_value;
+
+	console.log("crit"+criteria);
+	
+	var RestSchema = require('./models/restaurant');
+	var mongodbUri = 'mongodb://chia1234:ouhk@ds061984.mongolab.com:61984/ouhk';
+	var db = mongoose.connection;
+	db.on('error', console.error);
+	db.once('open', function () {
+		console.log(",,,");
+		var rest = mongoose.model('restaurant', RestSchema);
+		rest.update({name:req.params.name},{$set:criteria},function(err){
+			if (err) {
+				console.log("Error: " + err.message);
+				res.write(err.message);
+			}
+			else {
+				db.close();
+				res.end('Done',200);
+			}
+		});
+	});
+	mongoose.connect(mongodbUri);
+
 });
 
 //db.close();
