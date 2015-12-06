@@ -4,12 +4,12 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 
-//var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 var RestSchema = require('./models/restaurant');
 console.log("hello");
 
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 //var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 3000 } },
                 //replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 3000 } },
                  //};
@@ -28,16 +28,15 @@ console.log("set all var clear");
 console.log(mongoose.connection.readyState);
 
 app.get('/restaurant_id/:x', function(req,res){
-	console.log("start handle app.get");
+	//console.log("start handle app.get");
 	db.on('error', console.error);
-	console.log("no error conn");
-	
+	//console.log("no error conn");
 	db.once('open', function(){
 		var rest = mongoose.model('restaurant', RestSchema);
 		rest.find({restaurant_id: req.params.x},function(err,results){
 			if (err) {
-				console.log("Error");
-				res.json({message:"No matching document", "restaurant_id" : req.params.x});
+				//console.log("Error");
+				res.json({message:'No matching document', restaurant_id : req.params.x});
 				res.end();
 			}
 			else {
@@ -52,13 +51,75 @@ app.get('/restaurant_id/:x', function(req,res){
 			db.close();
 		});
 		//mongoose.createConnection(mongodbUri);
-		console.log("connected");
+		//console.log("connected");
 	});
 	mongoose.connect(mongodbUri);		
 });
 
+app.post('/', function(req,res) {
+	console.log('post handle');
+	db.on('error', console.error);
+	db.once('open', function() {
+		console.log('post handle connected ');
+		var rObj = {};
+		rObj.address = {};
+		rObj.address.building = req.body.building;
+		rObj.address.street = req.body.street;
+		rObj.address.zipcode = req.body.zipcode;
+		rObj.address.coord = [];
+		rObj.address.coord.push(req.body.lon);
+		rObj.address.coord.push(req.body.lat);
+		rObj.borough = req.body.borough;
+		rObj.cuisine = req.body.cuisine;
+		rObj.name = req.body.name;
+		rObj.restaurant_id = req.body.restaurant_id;
 
+		var rest = mongoose.model('restaurant', RestSchema);
+		var k = new rest(rObj);
+		console.log('seted all var');
+		k.save(function(err,results){
+			console.log('start save k');
+			if (err) {
+				console.log("error"+err.message);
+				res.end();
+			}
+			else {				
+				db.close();
+				console.log("done");
+				res.json({message:'insert done', id: 
+					k.id, results});
+				res.end();
+			}
+		});
+		//db.close();
+	});
+	mongoose.connect(mongodbUri);
+});
 
+app.delete('/restaurant_id/:id',function(req,res) {
+	//var restaurantSchema = require('./models/restaurant');
+	//mongoose.connect('mongodb://localhost/test');
+	//var db = mongoose.connection;
+	db.on('error', console.error);
+	console.log("v");
+	db.once('open', function() {
+		var rest = mongoose.model('restaurant', RestSchema);
+		console.log("var end");
+		rest.find({restaurant_id: req.params.id}).remove(function(err) {
+			console.log('finded on');
+			if (err) {
+				console.log("Error");
+				//res.status(500).json(err);
+				//throw err;
+			}
+			db.close();
+			console.log("success");
+			res.status(200).json({message: 'delete done', id: req.params.id});
+		});
+	});
+	mongoose.connect(mongodbUri);
+});
 
+//db.close();
 
 app.listen(process.env.PORT || 8099);

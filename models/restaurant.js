@@ -14,4 +14,4 @@ var restaurantSchema = new Schema({
     restaurant_id: String
 });
 
-module.exports = restaurantSchema;
+//module.exports = restaurantSchema;
