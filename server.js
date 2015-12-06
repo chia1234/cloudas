@@ -10,47 +10,55 @@ console.log("hello");
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
-var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } },
-                 };
+//var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 3000 } },
+                //replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 3000 } },
+                 //};
+
+var options = { server: { socketOptions: { keepAlive: 1} }};
 
 var mongodbUri = 'mongodb://chia1234:ouhk@ds061984.mongolab.com:61984/ouhk';
-//db = mongojs('mongodb://chia1234:ouhk1234@ds061984.mongolab.com:61984/ouhk', ["restaurant"], {authMechanism: 'ScramSHA1'});
+//var mongodbUri = 'mongodb://localhost/restaurant';
 
-//mongoose.connect(mongodbURL);
-//var db = mongoose.connection;
-mongoose.connect(mongodbUri, options);
-var conn = mongoose.connection;
-conn.on('error', console.error.bind(console, 'connection error:'));
+// mongoose.connect(mongodbUri);
+// //mongoose.createConnection(mongodbUri);
+// console.log("connected");
+var db = mongoose.connection;
+//var conn = mongoose.connection;
+console.log("set all var clear");
+console.log(mongoose.connection.readyState);
 
-conn.once('open', function() {
-var rest = mongoose.model('restaurant', RestSchema);
-console.log('connected');
-app.get('/res/:x', function(req,res){
-	rest.find({},function(err,results){
-		if (err) {
-			console.log("Error");
-			//res.write("Error: " + err.message);
-			//res.json("Error: " + err.message);
-			//db.close();
-			// res.write("Error Message:"+err.message);
-			// res.write("write");
-			// res.end("Not Found json:"+results+"\n",200);
-		}
-		else {
-			conn.close();
-			console.log("FOund"+results.length);
-			res.json({message:results});
-			//db.close();
-			//res.write('Found: ');
-			
-			//res.json(results);
-			//res.end("Find Json::"+results+"\n",200);
-
-		}
+app.get('/restaurant_id/:x', function(req,res){
+	console.log("start handle app.get");
+	db.on('error', console.error);
+	console.log("no error conn");
+	
+	db.once('open', function(){
+		var rest = mongoose.model('restaurant', RestSchema);
+		rest.find({restaurant_id: req.params.x},function(err,results){
+			if (err) {
+				console.log("Error");
+				res.json({message:"No matching document", "restaurant_id" : req.params.x});
+				res.end();
+			}
+			else {
+				if(results.length == 0 ){
+					res.json({message:'No matching document', restaurant_id:req.params.x});
+				}
+				if(results.length > 0 ){
+					res.json({message:{"restaurant_id": results}});
+					res.end();
+				}
+			}
+			db.close();
+		});
+		//mongoose.createConnection(mongodbUri);
+		console.log("connected");
 	});
+	mongoose.connect(mongodbUri);		
 });
-		
-  // Wait for the database connection to establish, then start the app.                         
-});
+
+
+
+
+
 app.listen(process.env.PORT || 8099);
