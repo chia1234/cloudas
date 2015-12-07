@@ -81,7 +81,7 @@ app.post('/', function(req,res) {
 		rObj.restaurant_id = req.body.restaurant_id;
 
 		var rest = mongoose.model('restaurant', RestSchema);
-		var k = new rest(req.body);
+		var k = new rest(rObj);
 		console.log('seted all var');
 		k.save(function(err,results){
 			console.log('start save k');
