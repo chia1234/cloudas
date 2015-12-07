@@ -121,7 +121,7 @@ app.delete('/restaurant_id/:id',function(req,res) {
 				//throw err;
 			}
 			db.close();
-			if(req.params.id !== null){
+			if(req.params._id !== null){
 				res.status(200).json({message: 'delete done', id: req.params.id});
 			}
 			else{
