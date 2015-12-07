@@ -128,7 +128,7 @@ app.delete('/restaurant_id/:id',function(req,res) {
 	mongoose.connect(mongodbUri);
 });
 
-app.put('/restaurant_id/:name/:attrib/:attrib_value', function(req,res) {
+app.put('/restaurant_id/:name/:attrib/', function(req,res) {
 	var criteria = {};
 	criteria[req.params.attrib] = req.params.attrib_value;
 
