@@ -144,11 +144,12 @@ app.put('/restaurant_id/:name/:attrib/', function(req,res) {
 		rest.update({name:req.params.name},{$set:criteria},function(err){
 			if (err) {
 				console.log("Error: " + err.message);
-				res.write(err.message);
+				res.status(500).json(err);
 			}
 			else {
 				db.close();
-				res.end('Done',200);
+				res.status(200).json({message: 'update done'});
+				//res.end('Done',200);
 			}
 		});
 	});
