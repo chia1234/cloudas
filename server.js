@@ -121,14 +121,14 @@ app.delete('/restaurant_id/:id',function(req,res) {
 				//throw err;
 			}
 			db.close();
-			if(req.params.id != null){
-				console.log("success");
+			if(req.params.id !== null){
 				res.status(200).json({message: 'delete done', id: req.params.id});
 			}
-			else
+			else{
+				console.log("success");
 				res.status(200).json({message: 'Delete fail'});
-
-		});
+			}
+		});	
 	});
 	mongoose.connect(mongodbUri);
 });
