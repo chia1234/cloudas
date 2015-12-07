@@ -1,14 +1,12 @@
-var http = require('http');
-var url  = require('url');
 var express = require('express');
 var app = express();
-var mongoose = require('mongoose');
-
 var bodyParser = require('body-parser');
-console.log("hello");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+var mongoose = require('mongoose');
+
 //var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 3000 } },
                 //replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 3000 } },
                  //};
@@ -33,7 +31,7 @@ app.get('/restaurant_id/:x', function(req,res){
 	//console.log("start handle app.get");
 	db.on('error', console.error);
 	//console.log("no error conn");
-	db.once('open', function(){
+	db.once('open', function(callback){
 		var rest = mongoose.model('restaurant', RestSchema);
 		rest.find({restaurant_id: req.params.x},function(err,results){
 			if (err) {
@@ -68,7 +66,39 @@ app.post('/', function(req,res) {
 	db.once('open', function() {
 		console.log('post handle connected ');
 		var rObj = {};
+		// if(req.body.building == null||req.body.street == null||req.body.zipcode == null||req.body.lon == null||req.body.lat == null||req.body.borough == null||req.body.cuisine == null||req.body.name == null||req.body.restaurant_id == null){
+		//    res.status(500).json(err);
+		//    throw err
+		// }
+		if(req.body.building == null){
+			req.body.building == "";
+		}
+		if(req.body.street == null){
+			req.body.street == "";
+		}
+		if(req.body.zipcode == null){
+			req.body.zipcode == "";
+		}
+		if(req.body.lon == null){
+			req.body.lon == "";
+		}
+		if(req.body.lat == null){
+			req.body.lat == "";
+		}
+		if(req.body.borough == null){
+			req.body.borough == "";
+		}
+		if(req.body.cuisine == null){
+			req.body.cuisine == "";
+		}
+		if(req.body.name == null){
+			req.body.name == "";
+		}
+		if(req.body.restaurant_id == null){
+			req.body.restaurant_id == "";
+		}
 		rObj.address = {};
+
 		rObj.address.building = JSON.stringify(req.body.building);
 		rObj.address.street = req.body.street;
 		rObj.address.zipcode = req.body.zipcode;
@@ -113,7 +143,7 @@ app.delete('/restaurant_id/:id',function(req,res) {
 	db.once('open', function() {
 		var rest = mongoose.model('restaurant', RestSchema);
 		console.log("var end");
-		rest.find({restaurant_id: req.params.id}).remove(function(err) {
+		rest.find({restaurant_id: req.params.id}).remove(function(err,resu) {
 			console.log('finded on');
 			if (err) {
 				console.log("Error");
@@ -121,11 +151,12 @@ app.delete('/restaurant_id/:id',function(req,res) {
 				//throw err;
 			}
 			db.close();
-			if(rest._id !== ""){
-				res.status(200).json({message: 'delete done', id: req.params.id, _id:req.params._id});
+			//console.log(resu);
+			if(resu.length !== null){
+				res.status(200).json({message: 'delete done', id: req.params.x});
 			}
 			else{
-				console.log("success");
+				//console.log("success");
 				res.status(200).json({message: 'Delete fail'});
 			}
 		});	
